@@ -29,3 +29,20 @@ function closeModal() {
   modalbg.style.display = "none";
 }
 
+// Error messages
+  // Creation + naming
+  for (let formIt of formData){
+    const errText = document.createElement("p");
+    errText.className = "wrong-input";
+    formIt.appendChild(errText);
+  }
+
+  // Styling
+  const wrongInput = document.querySelectorAll(".wrong-input");
+  for (let errTextStyle of wrongInput){
+    errTextStyle.style.display = "none";
+    errTextStyle.style.color = "#ff4e60";
+    errTextStyle.style.fontSize = "12px";
+  }
+
+
