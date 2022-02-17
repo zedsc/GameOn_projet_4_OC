@@ -55,12 +55,15 @@
       <div class="bground">
         <div class="content">
           <span class="close"></span>
+          <div class="bg-form-send">Merci ! Votre inscription a bien été reçue.
+            <button class="button btn-submit btn-close">Fermer</button>
+          </div>
           <div class="modal-body">
             <form
               name="reserve"
               action="index.html"
               method="get"
-              onsubmit="return validate();"
+              onsubmit="validateForm(); return false"
             >
               <div
                 class="formData">
@@ -81,6 +84,7 @@
                   type="text"
                   id="lastName"
                   name="lastName"
+                  minlength="2"
                 /><br>
               </div>
               <div
@@ -185,14 +189,22 @@
                   class="checkbox-input"
                   type="checkbox"
                   id="checkbox1"
+                  name="checkbox-option"
+                  onclick="checkTermsFunc()"
                   checked
+                  required
                 />
-                <label class="checkbox2-label" for="checkbox1" required>
+                <label class="checkbox2-label" for="checkbox1">
                   <span class="checkbox-icon"></span>
                   J'ai lu et accepté les conditions d'utilisation.
                 </label>
                 <br>
-                <input class="checkbox-input" type="checkbox" id="checkbox2" />
+                <input 
+                class="checkbox-input" 
+                type="checkbox" 
+                id="checkbox2" 
+                name="checkbox-option"
+                />
                 <label class="checkbox2-label" for="checkbox2">
                   <span class="checkbox-icon"></span>
                   Je souhaite être prévenu des prochains évènements.
