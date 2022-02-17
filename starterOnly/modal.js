@@ -179,4 +179,13 @@ function closeModal() {
       return false;
     }}
 
-  
+  // submit form
+  function validateForm() {
+    checkLocation();
+    if (firstNameVar && lastNameVar && emailVar && birthdateVar && quantityTournament && locationVar && checkTerms) {
+      document.querySelector(".bg-form-send").style.visibility = "visible";
+      return true;
+    } else {
+      return false;
+    }
+  }
