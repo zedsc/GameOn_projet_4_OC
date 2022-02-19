@@ -34,19 +34,10 @@ function closeModal() {
 
 // form validation
   // error messages
-    // creation + naming
-    for (let formIt of formData){
-      const errText = document.createElement("p");
-      errText.className = "wrong-input";
-      formIt.appendChild(errText);
-    }
-
-    // styling
-    const wrongInput = document.querySelectorAll(".wrong-input");
-    for (let errTextStyle of wrongInput){
-      errTextStyle.style.display = "none";
-      errTextStyle.style.color = "#ff4e60";
-      errTextStyle.style.fontSize = "12px";
+    // adding attributes to all .formData classes
+    for (let dataError of formData){
+      dataError.setAttribute("data-error", "");
+      dataError.setAttribute("data-error-visible", "false");
     }
 
   // inputs validation
@@ -56,14 +47,13 @@ function closeModal() {
       .getElementById("firstName")
       .addEventListener("input", function(event) {
         if (event.target.value.length > 0 && /^(?=.{2,30}$)[a-z]+(?:['-.\s][a-z]+)*$/.test(event.target.value)) {
-          document.querySelector("#firstName ~ .wrong-input").style.display = "none";
-          document.getElementById("firstName").style.border = "0.8px solid #ccc";
+          formData[0].setAttribute("data-error-visible", "false");
+          formData[0].removeAttribute("data-error");
           firstNameVar = true;
           return true;
         } else {
-          document.getElementById("firstName").style.border = "2px solid #ff4e60";
-          document.querySelector("#firstName ~ .wrong-input").style.display = "block";
-          document.querySelector("#firstName ~ .wrong-input").innerText = "Veuillez entrer 2 caractères ou plus pour le champ du nom.";
+          formData[0].setAttribute("data-error-visible", "true");
+          formData[0].setAttribute("data-error", "Veuillez entrer 2 caractères ou plus pour le champ du nom au format indiqué.");
           firstNameVar = false;
           return false;
         }
@@ -75,14 +65,13 @@ function closeModal() {
       .getElementById("lastName")
       .addEventListener("input", function(event) {
         if (event.target.value.length > 0 && /^(?=.{2,50}$)[a-z]+(?:['-.\s][a-z]+)*$/.test(event.target.value)) {
-          document.querySelector("#lastName ~ .wrong-input").style.display = "none";
-          document.getElementById("lastName").style.border = "0.8px solid #ccc";
+          formData[1].setAttribute("data-error-visible", "false");
+          formData[1].removeAttribute("data-error");
           lastNameVar = true;
           return true;
         } else {
-          document.getElementById("lastName").style.border = "2px solid #ff4e60";
-          document.querySelector("#lastName ~ .wrong-input").style.display = "block";
-          document.querySelector("#lastName ~ .wrong-input").innerText = "Veuillez entrer 2 caractères ou plus pour le champ du nom.";
+          formData[1].setAttribute("data-error-visible", "true");
+          formData[1].setAttribute("data-error", "Veuillez entrer 2 caractères ou plus pour le champ du nom au format indiqué.");
           lastNameVar = false;
           return false;
         }
@@ -94,14 +83,13 @@ function closeModal() {
       .getElementById("email")
       .addEventListener("input", function(event) {
         if (event.target.value.length > 0 && /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(event.target.value)) {
-          document.querySelector("#email ~ .wrong-input").style.display = "none";
-          document.getElementById("email").style.border = "0.8px solid #ccc";
+          formData[2].setAttribute("data-error-visible", "false");
+          formData[2].removeAttribute("data-error");
           emailVar = true;
           return true;
         } else {
-          document.getElementById("email").style.border = "2px solid #ff4e60";
-          document.querySelector("#email ~ .wrong-input").style.display = "block";
-          document.querySelector("#email ~ .wrong-input").innerText = "Vous devez entrer une adresse e-mail valide.";
+          formData[2].setAttribute("data-error-visible", "true");
+          formData[2].setAttribute("data-error", "Vous devez entrer une adresse e-mail valide.");
           emailVar = false;
           return false;
         }
@@ -113,14 +101,13 @@ function closeModal() {
       .getElementById("birthdate")
       .addEventListener("input", function(event) {
         if (event.target.value.length > 0 && /^([0-9]{4}|[0-9]{2})[-]([0]?[1-9]|[1][0-2])[-]([0]?[1-9]|[1|2][0-9]|[3][0|1])$/.test(event.target.value)) {
-          document.querySelector("#birthdate ~ .wrong-input").style.display = "none";
-          document.getElementById("birthdate").style.border = "0.8px solid #ccc";
+          formData[3].setAttribute("data-error-visible", "false");
+          formData[3].removeAttribute("data-error");
           birthdateVar = true;
           return true;
         } else {
-          document.getElementById("birthdate").style.border = "2px solid #ff4e60";
-          document.querySelector("#birthdate ~ .wrong-input").style.display = "block";
-          document.querySelector("#birthdate ~ .wrong-input").innerText = "Vous devez entrer votre date de naissance au format indiqué.";
+          formData[3].setAttribute("data-error-visible", "true");
+          formData[3].setAttribute("data-error", "Vous devez entrer votre date de naissance au format indiqué.");
           birthdateVar = false;
           return false;
         }
@@ -132,14 +119,13 @@ function closeModal() {
       .getElementById("quantity")
       .addEventListener("input", function(event) {
         if (event.target.value.length > 0 && /^(\d?[0-9]|[1-9]0)$/.test(event.target.value)) {
-          document.querySelector("#quantity ~ .wrong-input").style.display = "none";
-          document.getElementById("quantity").style.border = "0.8px solid #ccc";
+          formData[4].setAttribute("data-error-visible", "false");
+          formData[4].removeAttribute("data-error");
           quantityTournament = true;
           return true;
         } else {
-          document.getElementById("quantity").style.border = "2px solid #ff4e60";
-          document.querySelector("#quantity ~ .wrong-input").style.display = "block";
-          document.querySelector("#quantity ~ .wrong-input").innerText = "Vous devez saisir au moins un chiffre, y compris 0.";
+          formData[4].setAttribute("data-error-visible", "true");
+          formData[4].setAttribute("data-error", "Vous devez saisir au moins un chiffre, y compris 0.");
           quantityTournament = false;
           return false;
         }
@@ -158,10 +144,11 @@ function closeModal() {
       }
 
       if (locationVar) {
-        document.querySelector("#location6 ~ .wrong-input").style.display = "none";
+        formData[5].setAttribute("data-error-visible", "false");
+        formData[5].removeAttribute("data-error");
       } else {
-        document.querySelector("#location6 ~ .wrong-input").style.display = "block";
-        document.querySelector("#location6 ~ .wrong-input").innerText = "Vous devez choisir une option.";
+        formData[5].setAttribute("data-error-visible", "true");
+        formData[5].setAttribute("data-error", "Vous devez choisir une option.");
       }
     }
 
@@ -169,12 +156,13 @@ function closeModal() {
     let checkTerms = true;
     function checkTermsFunc() {
     if (document.getElementById("checkbox1").checked) {
-      document.querySelector("#checkbox2 ~ .wrong-input").style.display = "none";
+      formData[6].setAttribute("data-error-visible", "false");
+      formData[6].removeAttribute("data-error");
       checkTerms = true;
       return true;
     } else {
-      document.querySelector("#checkbox2 ~ .wrong-input").style.display = "block";
-      document.querySelector("#checkbox2 ~ .wrong-input").innerText = "Vous devez accepter les termes et conditions.";
+      formData[6].setAttribute("data-error-visible", "true");
+      formData[6].setAttribute("data-error", "Vous devez accepter les termes et conditions.");
       checkTerms = false;
       return false;
     }}
