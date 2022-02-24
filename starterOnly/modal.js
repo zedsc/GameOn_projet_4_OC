@@ -46,7 +46,7 @@ function closeModal() {
     document
       .getElementById("firstName")
       .addEventListener("input", function(event) {
-        if (event.target.value.length > 0 && /^(?=.{2,30}$)[a-z]+(?:['-.\s][a-z]+)*$/.test(event.target.value)) {
+        if (event.target.value.length > 0 && /^(?=.{2,30}$)[A-z]+(?:['-.\s][A-z]+)*$/.test(event.target.value)) {
           formData[0].setAttribute("data-error-visible", "false");
           formData[0].removeAttribute("data-error");
           firstNameVar = true;
@@ -64,7 +64,7 @@ function closeModal() {
     document
       .getElementById("lastName")
       .addEventListener("input", function(event) {
-        if (event.target.value.length > 0 && /^(?=.{2,50}$)[a-z]+(?:['-.\s][a-z]+)*$/.test(event.target.value)) {
+        if (event.target.value.length > 0 && /^(?=.{2,50}$)[A-z]+(?:['-.\s][A-z]+)*$/.test(event.target.value)) {
           formData[1].setAttribute("data-error-visible", "false");
           formData[1].removeAttribute("data-error");
           lastNameVar = true;
@@ -167,8 +167,21 @@ function closeModal() {
       return false;
     }}
 
+  // check no empty input
+  const inputs = document.querySelectorAll(".text-control");
+  function checkEmptyInput() {
+    for (const textField of inputs) {
+      if (textField.value === "") {
+        textField.setAttribute("data-error-visible", "true");
+      } else {
+        textField.setAttribute("data-error-visible", "false");
+      }
+    }
+  }
+
   // submit form
   function validateForm() {
+    checkEmptyInput();
     checkLocation();
     if (firstNameVar && lastNameVar && emailVar && birthdateVar && quantityTournament && locationVar && checkTerms) {
       document.querySelector(".bg-form-send").style.visibility = "visible";
