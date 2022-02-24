@@ -82,6 +82,7 @@ img {
     position: absolute;
     right: 0;
     top: 0;
+    margin-top: unset;
   }
   .topnav.responsive a {
     float: none;
@@ -90,14 +91,21 @@ img {
   }
 }
 
-
-
  @media screen and (max-width: 540px) {
   .topnav a {display: none;}
   .topnav a.icon {
     float: right;
     display: block;
-    margin-top: -15px;
+  }
+} 
+
+@media screen and (max-width: 342px) {
+  .topnav a.icon {
+    margin-top: -49px;
+  }
+
+  img {
+    width: 90%;
   }
 } 
 
@@ -108,7 +116,7 @@ main {
   padding-top: 0.5vw;
   padding-left: 2vw;
   padding-right: 2vw;
-  margin: 1px 20px 15px;
+  margin: 1px 10px 15px;
   border-radius: 2rem;
   text-align: justify;
 
@@ -173,8 +181,10 @@ main {
   margin: 5% auto;
   width: 100%;
   max-width: 500px;
-  animation-name: modalopen;
-  animation-duration: var(--modal-duration);
+  -webkit-animation-name: modalopen;
+          animation-name: modalopen;
+  -webkit-animation-duration: var(--modal-duration);
+          animation-duration: var(--modal-duration);
   background: #232323;
   border-radius: 10px;
   overflow: hidden;
@@ -245,6 +255,10 @@ input {
   opacity: 1;
 }
 .formData[data-error-visible="true"] .text-control {
+  border: 2px solid #e54858;
+}
+
+.text-control[data-error-visible="true"] {
   border: 2px solid #e54858;
 }
 
@@ -541,8 +555,18 @@ footer {
   }
 
   .hero-headline {
-    font-size: 3.5rem;
+    font-size: 3.2rem;
     white-space: unset;
+  }
+}
+
+@-webkit-keyframes modalopen {
+  from {
+    opacity: 0;
+    transform: translateY(-150px);
+  }
+  to {
+    opacity: 1;
   }
 }
 
