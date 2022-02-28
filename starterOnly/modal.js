@@ -35,18 +35,25 @@ function closeModal() {
 // form validation
   // error messages
     // adding attributes to all .formData classes
-    for (let dataError of formData){
+    for (let dataError of formData) {
       dataError.setAttribute("data-error", "");
       dataError.setAttribute("data-error-visible", "false");
     }
 
   // inputs validation
+  // Regex
+  firstNameRegex = /^(?=.{2,30}$)[a-zA-ZÀ-ú]+(?:['-.\s][a-zA-ZÀ-ú]+)*$/;
+  lastNameRegex = /^(?=.{2,50}$)[a-zA-ZÀ-ú]+(?:['-.\s][a-zA-ZÀ-ú]+)*$/;
+  emailRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  birthdayRegex = /^([0-9]{4}|[0-9]{2})[-]([0]?[1-9]|[1][0-2])[-]([0]?[1-9]|[1|2][0-9]|[3][0|1])$/;
+  quantityTournamentRegex = /^(\d?[0-9]|[1-9]0)$/;
+
     // firstname input
     let firstNameVar = false;
     document
       .getElementById("firstName")
       .addEventListener("input", function(event) {
-        if (event.target.value.length > 0 && /^(?=.{2,30}$)[A-z]+(?:['-.\s][A-z]+)*$/.test(event.target.value)) {
+        if (firstNameRegex.test(event.target.value)) {
           formData[0].setAttribute("data-error-visible", "false");
           formData[0].removeAttribute("data-error");
           firstNameVar = true;
@@ -64,7 +71,7 @@ function closeModal() {
     document
       .getElementById("lastName")
       .addEventListener("input", function(event) {
-        if (event.target.value.length > 0 && /^(?=.{2,50}$)[A-z]+(?:['-.\s][A-z]+)*$/.test(event.target.value)) {
+        if (lastNameRegex.test(event.target.value)) {
           formData[1].setAttribute("data-error-visible", "false");
           formData[1].removeAttribute("data-error");
           lastNameVar = true;
@@ -82,7 +89,7 @@ function closeModal() {
     document
       .getElementById("email")
       .addEventListener("input", function(event) {
-        if (event.target.value.length > 0 && /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(event.target.value)) {
+        if (event.target.value.length > 0 && emailRegex.test(event.target.value)) {
           formData[2].setAttribute("data-error-visible", "false");
           formData[2].removeAttribute("data-error");
           emailVar = true;
@@ -100,7 +107,7 @@ function closeModal() {
     document
       .getElementById("birthdate")
       .addEventListener("input", function(event) {
-        if (event.target.value.length > 0 && /^([0-9]{4}|[0-9]{2})[-]([0]?[1-9]|[1][0-2])[-]([0]?[1-9]|[1|2][0-9]|[3][0|1])$/.test(event.target.value)) {
+        if (event.target.value.length > 0 && birthdayRegex.test(event.target.value)) {
           formData[3].setAttribute("data-error-visible", "false");
           formData[3].removeAttribute("data-error");
           birthdateVar = true;
@@ -118,7 +125,7 @@ function closeModal() {
     document
       .getElementById("quantity")
       .addEventListener("input", function(event) {
-        if (event.target.value.length > 0 && /^(\d?[0-9]|[1-9]0)$/.test(event.target.value)) {
+        if (event.target.value.length > 0 && quantityTournamentRegex.test(event.target.value)) {
           formData[4].setAttribute("data-error-visible", "false");
           formData[4].removeAttribute("data-error");
           quantityTournament = true;
@@ -134,8 +141,9 @@ function closeModal() {
     // location checkbox (radio)
     let locationVar = false;
     function checkLocation() {
-      for (var i = 0; i < document.getElementsByName("location").length; i++) {
-        if (document.getElementsByName("location")[i].checked) {
+      const locationsAll = document.getElementsByName("location");
+      for (let location of locationsAll) {
+        if (location.checked) {
           locationVar = true;
           break;
         } else {
@@ -168,9 +176,9 @@ function closeModal() {
     }}
 
   // check no empty input
-  const inputs = document.querySelectorAll(".text-control");
+  const inputs = document.getElementsByClassName("text-control");
   function checkEmptyInput() {
-    for (const textField of inputs) {
+    for (let textField of inputs) {
       if (textField.value === "") {
         textField.setAttribute("data-error-visible", "true");
       } else {
